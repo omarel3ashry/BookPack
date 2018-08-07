@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/scroll_view_height"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/margin_s"
+        android:layout_marginStart="@dimen/margin_s"
+        android:layout_marginBottom="@dimen/margin_s"
+        >
+
+        <TextView
+            android:id="@+id/output"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            tools:text="Table details" />
+    </ScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/margin_m"
+        android:layout_marginStart="@dimen/margin_m"
+        android:orientation="vertical">
+
+        <TextView
+            style="@style/CategoryStyle"
+            android:layout_gravity="center"
+            android:text="@string/input" />
+
+        <EditText
+            android:id="@+id/b.name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/book_name"
+            android:inputType="text" />
+
+        <EditText
+            android:id="@+id/b.price"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/book_price"
+            android:inputType="number" />
+
+        <EditText
+            android:id="@+id/b.quantity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/book_quantity"
+            android:inputType="number" />
+
+        <EditText
+            android:id="@+id/s.name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/supplier_name"
+            android:inputType="text" />
+
+        <EditText
+            android:id="@+id/s.phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/supplier_phone"
+            android:inputType="phone" />
+
+
+    </LinearLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/floatingActionButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:clickable="true"
+        android:focusable="true"
+        app:srcCompat="@drawable/ic_add_black_24dp"
+        tools:ignore="VectorDrawableCompat" />
+
+</LinearLayout>
