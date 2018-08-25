@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".EditorActivity">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/margin_m"
+        android:layout_marginStart="@dimen/margin_m"
+        android:orientation="vertical">
+
+
+        <EditText
+            android:id="@+id/b_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_m"
+            android:hint="@string/book_name"
+            android:inputType="text" />
+
+        <EditText
+            android:id="@+id/b_price"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_m"
+            android:hint="@string/book_price"
+            android:inputType="number" />
+
+        <EditText
+            android:id="@+id/b_quantity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_m"
+            android:hint="@string/book_quantity"
+            android:inputType="number" />
+
+        <EditText
+            android:id="@+id/s_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_m"
+            android:hint="@string/supplier_name"
+            android:inputType="text" />
+
+        <EditText
+            android:id="@+id/s_phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_m"
+            android:hint="@string/supplier_phone"
+            android:inputType="phone" />
+
+        <Button
+            android:id="@+id/call_provider"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_m"
+            android:text="@string/call_provider" />
+
+    </LinearLayout>
+
+
+</LinearLayout>

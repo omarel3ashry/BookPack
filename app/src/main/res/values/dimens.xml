@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="margin_s">5dp</dimen>
     <dimen name="margin_m">20dp</dimen>
-    <dimen name="scroll_view_height">180dp</dimen>
+    <!-- Default screen margins, per the Android Design guidelines. -->
 </resources>
