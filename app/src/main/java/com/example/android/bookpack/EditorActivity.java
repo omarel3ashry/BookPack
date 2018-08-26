@@ -1,6 +1,7 @@
 package com.example.android.bookpack;
 
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
@@ -21,6 +22,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.example.android.bookpack.books.DbContract.DbEntry;
@@ -37,6 +39,12 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
     EditText editTextPrice;
     @BindView(R.id.b_quantity)
     EditText editTextQuantity;
+    @BindView(R.id.minus_quantity)
+    ImageButton minusImageBtn;
+    @BindView(R.id.plus_quantity)
+    ImageButton plusImageBtn;
+    @BindView(R.id.edit_rate)
+    EditText editTextRate;
     @BindView(R.id.s_name)
     EditText editTextS_Name;
     @BindView(R.id.s_phone)
@@ -46,6 +54,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
     private Uri bookCurrentUri;
     private static final int EXISTING_BOOK_LOADER = 1;
     String phone;
+    int currentQuantity;
     private boolean booksHasChanged = false;
     private View.OnTouchListener touchListener = new View.OnTouchListener() {
         @Override
@@ -67,6 +76,9 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         editTextQuantity.setOnTouchListener(touchListener);
         editTextS_Name.setOnTouchListener(touchListener);
         editTextS_Phone.setOnTouchListener(touchListener);
+        editTextRate.setOnTouchListener(touchListener);
+        plusImageBtn.setOnTouchListener(touchListener);
+        minusImageBtn.setOnTouchListener(touchListener);
 
         if (bookCurrentUri == null) {
             setTitle("Add Book");
@@ -82,12 +94,72 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
                 if (!TextUtils.isEmpty(phone)) {
                     Uri uri = Uri.parse("tel:" + phone);
                     Intent intent = new Intent(Intent.ACTION_DIAL, uri);
-                    startActivity(intent);
+                    if (intent.resolveActivity(getPackageManager()) != null) {
+                        startActivity(intent);
+                    }
                 } else {
-                    Toast.makeText(EditorActivity.this,"Invalid phone number", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(EditorActivity.this, "Invalid phone number", Toast.LENGTH_SHORT).show();
                 }
             }
         });
+
+        minusImageBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                adjustMinusQuantity(EditorActivity.this);
+            }
+        });
+        plusImageBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                adjustPlusQuantity(EditorActivity.this);
+            }
+        });
+
+    }
+
+    private void adjustPlusQuantity(Context context) {
+        Integer rate;
+        if (!TextUtils.isEmpty(editTextRate.getText().toString().trim())) {
+            rate = Integer.parseInt(editTextRate.getText().toString().trim());
+        } else {
+            editTextRate.setText("1");
+            rate = Integer.parseInt(editTextRate.getText().toString().trim());
+        }
+        if (!TextUtils.isEmpty(editTextQuantity.getText().toString())) {
+            currentQuantity = Integer.parseInt(editTextQuantity.getText().toString().trim());
+        } else {
+            editTextQuantity.setText("0");
+            currentQuantity = Integer.parseInt(editTextQuantity.getText().toString().trim());
+        }
+        if (currentQuantity >= 0 && rate > 0) {
+            currentQuantity += rate;
+            editTextQuantity.setText(String.valueOf(currentQuantity));
+        } else {
+            Toast.makeText(context, "Can't adjust quantity !", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void adjustMinusQuantity(Context context) {
+        Integer rate;
+        if (!TextUtils.isEmpty(editTextRate.getText().toString().trim())) {
+            rate = Integer.parseInt(editTextRate.getText().toString().trim());
+        } else {
+            editTextRate.setText("1");
+            rate = Integer.parseInt(editTextRate.getText().toString().trim());
+        }
+        if (!TextUtils.isEmpty(editTextQuantity.getText().toString())) {
+            currentQuantity = Integer.parseInt(editTextQuantity.getText().toString().trim());
+        } else {
+            editTextQuantity.setText("0");
+            currentQuantity = Integer.parseInt(editTextQuantity.getText().toString().trim());
+        }
+        if (currentQuantity > 0 && rate > 0 && rate < currentQuantity) {
+            currentQuantity -= rate;
+            editTextQuantity.setText(String.valueOf(currentQuantity));
+        } else {
+            Toast.makeText(context, "Can't decrease quantity anymore !", Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
@@ -152,7 +224,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
     public void deleteCurrent() {
         int rowDeleted = getContentResolver().delete(bookCurrentUri, null, null);
         if (rowDeleted == -1) {
-            Toast.makeText(this,"Error Deleting Book", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Error Deleting Book", Toast.LENGTH_SHORT).show();
         } else {
             Toast.makeText(this, "Book Deleted Successfully", Toast.LENGTH_SHORT).show();
         }
@@ -171,17 +243,17 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         if (TextUtils.isEmpty(editTextName.getText()) || TextUtils.isEmpty(editTextPrice.getText()) ||
                 TextUtils.isEmpty(editTextQuantity.getText()) || TextUtils.isEmpty(editTextS_Name.getText()) ||
                 TextUtils.isEmpty(editTextS_Phone.getText())) {
-            Toast.makeText(this,"One or more input are missing !!", Toast.LENGTH_SHORT).show();
-
+            Toast.makeText(this, "One or more input are missing !!", Toast.LENGTH_SHORT).show();
+            return;
         }
         int convPrice = 0;
         if (!TextUtils.isEmpty(price)) {
             convPrice = Integer.parseInt(price);
-        } int convQuantity = 0;
+        }
+        int convQuantity = 0;
         if (!TextUtils.isEmpty(quantity)) {
             convQuantity = Integer.parseInt(quantity);
         }
-
 
 
         ContentValues values = new ContentValues();
@@ -198,7 +270,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
                 if (newUri == null) {
                     Toast.makeText(this, "Error Inserting Book", Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(this,"Book Inserted Successfully", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Book Inserted Successfully", Toast.LENGTH_SHORT).show();
                 }
                 finish();
             }
@@ -208,7 +280,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
             if (updatedRow == -1) {
                 Toast.makeText(this, "Failed to update the selected row", Toast.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(this, "Row updated successfully with ID"+ updatedRow, Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Row updated successfully", Toast.LENGTH_SHORT).show();
             }
             finish();
         }
@@ -263,7 +335,9 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         String checkSPhone = editTextS_Phone.getText().toString().trim();
         return TextUtils.isEmpty(checkName) || TextUtils.isEmpty(checkPrice) || TextUtils.isEmpty(checkQuantity)
                 || TextUtils.isEmpty(checkSName) || TextUtils.isEmpty(checkSPhone);
-    } private boolean allIsEmpty() {
+    }
+
+    private boolean allIsEmpty() {
         String checkName = editTextName.getText().toString().trim();
         String checkPrice = editTextPrice.getText().toString().trim();
         String checkQuantity = editTextQuantity.getText().toString().trim();

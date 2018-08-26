@@ -12,7 +12,8 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/margin_m"
         android:layout_marginStart="@dimen/margin_m"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        tools:ignore="UselessParent">
 
 
         <EditText
@@ -31,13 +32,49 @@
             android:hint="@string/book_price"
             android:inputType="number" />
 
-        <EditText
-            android:id="@+id/b_quantity"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_m"
-            android:hint="@string/book_quantity"
-            android:inputType="number" />
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/b_quantity"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_m"
+                android:layout_weight="1"
+                android:hint="@string/book_quantity"
+                android:inputType="number" />
+
+            <ImageButton
+                android:id="@+id/minus_quantity"
+                android:layout_width="@dimen/quantity_change_btn"
+                android:layout_height="@dimen/quantity_change_btn"
+                android:layout_gravity="center_vertical"
+                android:layout_marginTop="@dimen/margin_s"
+                android:background="@drawable/remove_circle_outline"
+                android:contentDescription="@string/reduce_quantity_value" />
+
+            <EditText
+                android:id="@+id/edit_rate"
+                android:layout_width="@dimen/rate_width"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginTop="@dimen/margin_s"
+                android:hint="@string/rate_of_change"
+                android:inputType="number" />
+
+            <ImageButton
+                android:id="@+id/plus_quantity"
+                android:layout_width="@dimen/quantity_change_btn"
+                android:layout_height="@dimen/quantity_change_btn"
+                android:layout_gravity="center_vertical"
+                android:layout_marginTop="@dimen/margin_s"
+
+                android:background="@drawable/add_circle_outline"
+                android:contentDescription="@string/increase_quantity_value" />
+
+        </LinearLayout>
 
         <EditText
             android:id="@+id/s_name"
@@ -47,21 +84,28 @@
             android:hint="@string/supplier_name"
             android:inputType="text" />
 
-        <EditText
-            android:id="@+id/s_phone"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_m"
-            android:hint="@string/supplier_phone"
-            android:inputType="phone" />
+            android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/call_provider"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_m"
-            android:text="@string/call_provider" />
+            <EditText
+                android:id="@+id/s_phone"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_m"
+                android:layout_weight="1"
+                android:hint="@string/supplier_phone"
+                android:inputType="phone" />
 
+            <Button
+                android:id="@+id/call_provider"
+                android:layout_width="@dimen/call_btn"
+                android:layout_height="@dimen/call_btn"
+                android:layout_margin="@dimen/margin_s2"
+                android:layout_marginTop="@dimen/margin_m"
+                android:background="@drawable/call" />
+        </LinearLayout>
     </LinearLayout>
 
 

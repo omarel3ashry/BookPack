@@ -26,6 +26,8 @@ public class BookAdapter extends CursorAdapter {
     TextView bookPrice;
     @BindView(R.id.book_quantity)
     TextView bookQuantity;
+    @BindView(R.id.out_of_stock)
+    TextView outOfStock;
     @BindView(R.id.btn_sell)
     Button buttonSell;
     String quantityString;
@@ -59,15 +61,18 @@ public class BookAdapter extends CursorAdapter {
         buttonSell.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-
                 Uri uri = ContentUris.withAppendedId(DbEntry.CONTENT_URI, currentRowID);
                 adjustBookQuantity(context, uri, quantity);
-//                    quantityString = String.valueOf(quantity);
-//                    bookQuantity.setText(quantityString);
-
             }
         });
+        if (quantity == 0){
+            bookQuantity.setVisibility(View.INVISIBLE);
+            outOfStock.setVisibility(View.VISIBLE);
+        }
+        else {
+            bookQuantity.setVisibility(View.VISIBLE);
+            outOfStock.setVisibility(View.INVISIBLE);
+        }
     }
 
     private void adjustBookQuantity(Context context, Uri currentUri, int currentQuantity) {

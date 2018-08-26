@@ -5,14 +5,12 @@
     <string name="book_quantity">Book Quantity</string>
     <string name="book_price">Book Price</string>
     <string name="book_name">Book Name</string>
-    <string name="sell">Sell</string>
     <string name="add_book">Add Book</string>
     <string name="save">Save</string>
     <string name="delete_all_books">Delete All Books</string>
     <string name="add_some_books">Add some books.</string>
     <string name="bookshelf_is_empty">Bookshelf is empty !!</string>
     <string name="empty_view_img">empty view img</string>
-    <string name="call_provider">Call Provider</string>
     <string name="unsaved_changes_dialog_msg">Discard your changes and quit editing?</string>
     <string name="discard">Discard</string>
     <string name="keep_editing">Keep Editing</string>
@@ -31,4 +29,9 @@
     <string name="name">Name</string>
     <string name="price">Price</string>
     <string name="quantity">Quantity</string>
+    <string name="reduce_quantity_value">reduce quantity value</string>
+    <string name="rate_of_change">rate</string>
+    <string name="increase_quantity_value">increase quantity value</string>
+    <string name="out_of_stock">Out Of Stock</string>
+    <string name="price_sympol">$</string>
 </resources>

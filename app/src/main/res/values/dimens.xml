@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="margin_m">20dp</dimen>
-    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="margin_s">15dp</dimen>
+    <dimen name="margin_s2">10dp</dimen>
+    <dimen name="btn_sell">50dp</dimen>
+    <dimen name="call_btn">45dp</dimen>
+    <dimen name="quantity_change_btn">30dp</dimen>
+    <dimen name="rate_width">40dp</dimen>
+
 </resources>
